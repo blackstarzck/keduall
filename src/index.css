@@ -1,0 +1,49 @@
+@import './fonts.css';
+@import 'swiper/css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --text-black: #000000;
+  --text-default: #424242;
+
+  --primary: #0F3060;
+  --secondary: #FFAE2C;
+
+  --disabled: #999999;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  color: var(--text-default);
+  font-family: 'Freesentation', sans-serif;
+  line-height: 1;
+  overflow-x: hidden;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 100;
+  src: local('프리젠테이션 1 Thin'), url('/fonts/Freesentation-1Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 200;
+  src: local('프리젠테이션 2 ExtraLight'), url('/fonts/Freesentation-2ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 300;
+  src: local('프리젠테이션 3 Light'), url('/fonts/Freesentation-3Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 400;
+  src: local('프리젠테이션 4 Regular'), url('/fonts/Freesentation-4Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 500;
+  src: local('프리젠테이션 5 Medium'), url('/fonts/Freesentation-5Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 600;
+  src: local('프리젠테이션 6 SemiBold'), url('/fonts/Freesentation-6SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 700;
+  src: local('프리젠테이션 7 Bold'), url('/fonts/Freesentation-7Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 800;
+  src: local('프리젠테이션 8 ExtraBold'), url('/fonts/Freesentation-8ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Freesentation';
+  font-weight: 900;
+  src: local('프리젠테이션 9 Black'), url('/fonts/Freesentation-9Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Variable Concept';
+  font-weight: 900;
+  src: local('Myriad Variable Concept Light C'), url('/fonts/Myriad Variable Concept.ttf') format('truetype');
+}
