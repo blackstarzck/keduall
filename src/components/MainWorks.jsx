@@ -151,7 +151,7 @@ const Contents = styled.div`
       right: 0;
       width: 1px;
       height: 100%;
-      background-color: #eeeeee;
+      background-color: #cecece;
     }
 
     .img-container {
@@ -172,7 +172,7 @@ const Contents = styled.div`
           left: 50%;
           transform: translate(-50%, -50%);
           max-width: fit-content;
-          height:20rem;
+          height: 24rem;
         }
       }
       &:hover .img {
