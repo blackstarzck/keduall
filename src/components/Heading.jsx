@@ -7,11 +7,12 @@ const Heading = ({ children }) => {
 
 const HeadingContainer = styled.h3`
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--primary);
   letter-spacing: 1px;
   margin-bottom: 46px;
   position: relative;
+  z-index: 1;
 
   &::before {
     content: '';

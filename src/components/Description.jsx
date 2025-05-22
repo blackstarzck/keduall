@@ -7,6 +7,8 @@ const Description = ({ children }) => {
 
 const DescriptionContainer = styled.div`
   font-size: 42px;
+  font-weight: 500;
+  line-height: 1.1;
   display: flex;
   flex-direction: column;
   gap: 10px;

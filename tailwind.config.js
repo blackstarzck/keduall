@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily: {
         freesentation: ['Freesentation', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        concept: ['Myriad Variable Concept', 'sans-serif'],
       },
     },
   },

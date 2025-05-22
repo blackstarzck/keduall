@@ -27,13 +27,11 @@ const MainBanner = () => {
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
-    console.log("pause", pause)
-    if (swiperRef) {
-      console.log(swiperRef)
+    if (swiperRef.current && swiperRef.current.autoplay) {
       if (pause) {
-        swiperRef.current.autoplay.pause();
+        swiperRef.current.autoplay.stop();
       } else {
-        swiperRef.current.autoplay.resume();
+        swiperRef.current.autoplay.start();
       }
     }
   }, [pause]);
@@ -55,6 +53,15 @@ const MainBanner = () => {
             timerRef.current.style.width = `${(1 - percentage) * 100}%`; // Update bar width based on percentage
           }
         }}
+        onSlideChange={(swiper) => {
+          setCurrentSlide(swiper.realIndex + 1)
+
+          if (swiperRef.current && swiperRef.current.autoplay) {
+            if (pause) {
+              swiperRef.current.autoplay.stop();
+            }
+          }
+        }}
       >
         {bannerItems.map((item) => (
           <SwiperSlide>
@@ -74,16 +81,16 @@ const MainBanner = () => {
       </Swiper>
       <Pagination>
         <div className="pagination-container">
-          <span className="current">0{currentSlide}</span>
+          <span className="current font-concept">0{currentSlide}</span>
           <div className="progress">
             <div ref={timerRef} className="bar"></div>
           </div>
-          <span className="total">0{bannerItems.length}</span>
+          <span className="total font-concept">0{bannerItems.length}</span>
           <div className="arrows">
             <button onClick={() => swiperRef.current.slidePrev()} className="prev"><img src="/icons/arrow-left-white.svg" alt="이전" /></button>
             <button onClick={() => swiperRef.current.slideNext()} className="next"><img src="/icons/arrow-right-white.svg" alt="다음" /></button>
           </div>
-          <button className="pause-pause" onClick={() => setPause(!pause)}><img src={pause ? "/icons/play-white.svg" : "/icons/pause-white.svg"} alt="일시정지" /></button>
+          <button className="play-pause" onClick={() => setPause(!pause)}><img src={pause ? "/icons/play-white.svg" : "/icons/pause-white.svg"} alt="일시정지" /></button>
         </div>
       </Pagination>
     </MainBannerContainer>
@@ -147,7 +154,6 @@ const Pagination = styled.div`
   align-items: center;
 
   span {
-    font-family: 'Myriad Variable Concept';
     font-size: 14px;
     color: #FFFFFF;
   }
@@ -184,7 +190,7 @@ const Pagination = styled.div`
       &.prev {
         margin-right: 8px;
       }
-      &.pause-pause {
+      &.play-pause {
         border-radius: 50%;
         background-color: rgba(0, 0, 0, .2);
       }

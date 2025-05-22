@@ -10,36 +10,35 @@ const Introduction = () => {
   const introRef = useRef(null);
 
   useEffect(() => {
-      gsap.to(subTitleRef.current, {
-        scrollTrigger: {
-          trigger: '.intro-container',
-          start: 'top center',
-          end: 'bottom center',
-          scrub: true,
-          // markers: true,
-        },
-        x: '1%',
-        opacity: 1,
-        duration: 1,
-      })
-      gsap.to(introRef.current, {
-        scrollTrigger: {
-          trigger: '.intro-container',
-          start: 'top center',
-          end: 'bottom center',
-          scrub: true,
-          // markers: true,
-        },
-        x: '-1%',
-        opacity: 1,
-        duration: 1,
-      })
+    ScrollTrigger.create({
+      trigger: '.intro-container',
+      start: 'top center',
+      end: 'bottom center',
+      onEnter: () => {
+        let tl = gsap.timeline();
+
+        tl.to(subTitleRef.current, {
+          x: '1%',
+          opacity: 1,
+          duration: 0.4,
+          ease: 'power2.inOut',
+        })
+        .to(introRef.current, {
+          x: '-1%',
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.inOut',
+        }, "-=0.3")
+      },
+      once: true,
+      // markers: true,
+    })
   }, [])
 
   return (
     <IntroductionContainer className="intro-container">
       <SubTitle ref={subTitleRef} className="opacity-0 pl-[86px]">KeduAll</SubTitle>
-      <div ref={introRef} className="text-right opacity-0 pr-[70px]">
+      <div ref={introRef} className="text-right opacity-0 pr-[70px] mt-[30px]">
         <div className="inline-block text-[var(--text-black)] mr-2">Shaping the future of </div>
         <div className="inline-block text-[var(--secondary)]">Korean education</div>
       </div>
@@ -52,7 +51,7 @@ const IntroductionContainer = styled.div`
   padding: 86px 0;
 
   div {
-    font-size: 50px;
+    font-size: 60px;
     font-weight: 500;
     letter-spacing: -2px;
     word-spacing: 2px;
@@ -61,7 +60,7 @@ const IntroductionContainer = styled.div`
 
 const SubTitle = styled.h3`
   display: block;
-  font-size: 90px;
+  font-size: 120px;
   font-weight: 700;
   line-height: 1;
   color: var(--primary);
@@ -72,8 +71,8 @@ const SubTitle = styled.h3`
   &::before {
     content: '';
     display: block;
-    width: 108px;
-    height: 108px;
+    width: 128px;
+    height: 128px;
     background-color: #FFCD85;
     border-radius: 50%;
     position: absolute;

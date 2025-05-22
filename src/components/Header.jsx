@@ -66,8 +66,9 @@ const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
+  // background: rgba(255, 255, 255, 0.2);
+  background-color: rgba(96, 97, 119, .4);
+  backdrop-filter: blur(10px);
 `;
 
 const Logo = styled.h1`
@@ -79,7 +80,7 @@ const Logo = styled.h1`
     display: block;
     width: 100%;
     height: 50px;
-    background-image: url("/images/keduall_dark.png");
+    background-image: url("/images/keduall_white.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -136,6 +137,7 @@ const GnbList = styled.ul`
 
     & > a {
       color: #FFFFFF;
+      font-weight: 500;
       font-size: 18px;
       transition: all .3s ease;
     }
