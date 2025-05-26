@@ -1,5 +1,6 @@
-@import './fonts.css';
+/* @import './fonts.css'; */
 @import 'swiper/css';
+@import 'fonts.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,9 +29,9 @@
 body {
   font-size: 16px;
   color: var(--text-default);
-  font-family: 'Freesentation', sans-serif;
+  font-family: 'Freesentation','Noto Sans KR', sans-serif;
   line-height: 1;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 ul, li {

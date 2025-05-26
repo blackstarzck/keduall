@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Section from './Section';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { _checkPlugin } from 'gsap/gsap-core';
+import useDeviceType from '../hooks/useDeviceType';
 
 const props = {
   heading: 'ABOUT',
@@ -43,106 +45,156 @@ const MainAbout = () => {
   const [swiperDragStatus, setSwiperDragStatus] = useState(false);
   const swiperRef = useRef(null);
   const swiperPreviewRef = useRef(null);
+  const deviceType = useDeviceType();
+
+  useEffect(() => {
+    console.log("deviceType: ", deviceType);
+
+  }, [deviceType])
 
   return (
-    <MainAboutContainer>
+    <MainAboutContainer id="about">
       <Section {...props}>
-        <Contents>
-          <div className="left">
-            <ul>
-            {
-                viewItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className={current === (item.id - 1) ? 'active' : ''}
-                    onClick={() => {
-                      const targetIndex = item.id - 1;
-                      swiperRef.current?.slideToLoop(targetIndex)
-                      swiperPreviewRef.current?.slideToLoop(targetIndex)
-                      setSwiperDragStatus(true)
-                      setCurrent(targetIndex)
+        { 
+          deviceType === 'desktop' ? (
+            <DeskTopContents>
+              <div className="left">
+                <ul>
+                {
+                    viewItems.map((item) => (
+                      <li
+                        key={item.id}
+                        className={current === (item.id - 1) ? 'active' : ''}
+                        onClick={() => {
+                          const targetIndex = item.id - 1;
+                          swiperRef.current?.slideToLoop(targetIndex)
+                          swiperPreviewRef.current?.slideToLoop(targetIndex)
+                          setSwiperDragStatus(true)
+                          setCurrent(targetIndex)
+                        }}
+                      >
+                        <span>{item.heading}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+              <div className="right">
+                <ViewContainer>
+                  <Swiper
+                    loop={true}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    onSwiper={(swiper) => swiperRef.current = swiper}
+                    onSlideChange={(swiper) => {
+                      if (current === swiper.realIndex) return;
+                      if (swiperDragStatus) return;
+
+                      if (swiper.swipeDirection === 'next') {
+                        swiperPreviewRef.current?.slideNext()
+                        setCurrent(swiper.realIndex)
+                      } else if (swiper.swipeDirection === 'prev') {
+                        swiperPreviewRef.current?.slidePrev()
+                        setCurrent(swiper.realIndex)
+                      }
+                    }}
+                    onSlideChangeTransitionEnd={() => {
+                      setSwiperDragStatus(false)
                     }}
                   >
-                    <span>{item.heading}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <div className="right">
-            <ViewContainer>
-              <Swiper
-                loop={true}
-                spaceBetween={0}
-                slidesPerView={1}
-                onSwiper={(swiper) => swiperRef.current = swiper}
-                onSlideChange={(swiper) => {
-                  if (current === swiper.realIndex) return;
-                  if (swiperDragStatus) return;
-
-                  if (swiper.swipeDirection === 'next') {
-                    swiperPreviewRef.current?.slideNext()
-                    setCurrent(swiper.realIndex)
-                  } else if (swiper.swipeDirection === 'prev') {
-                    swiperPreviewRef.current?.slidePrev()
-                    setCurrent(swiper.realIndex)
-                  }
-                }}
-                onSlideChangeTransitionEnd={() => {
-                  setSwiperDragStatus(false)
-                }}
-              >
-                {
-                  viewItems.map((item, idx) => (
-                    <SwiperSlide key={item.id}>
-                      <ViewItem>
-                        <ViewDescription>
-                          <h3>{item.heading}</h3>
-                          <p>{item.description}</p>
-                        </ViewDescription>
-                        <ViewImage>
-                          <img src={item.imageSrc} alt={item.heading} />
-                        </ViewImage>
-                      </ViewItem>
-                    </SwiperSlide>
-                  ))
-                }
-              </Swiper>
-            </ViewContainer>
-            <PreviewContainer>
-              <Swiper
-                loop={true}
-                spaceBetween={0}
-                slidesPerView={1}
-                onSwiper={(swiper) => {
-                  swiperPreviewRef.current = swiper
-                }}
-                allowTouchMove={false}
-              >
-                {
-                  previewItems.map((item) => (
-                    <SwiperSlide key={item.id}>
-                      <PreviewItem>
-                        <img src={item.imageSrc} alt={item.heading} draggable="false" />
-                      </PreviewItem>
-                    </SwiperSlide>
-                  ))
-                }
-              </Swiper>
-            </PreviewContainer>
-          </div>
-        </Contents>
+                    {
+                      viewItems.map((item, idx) => (
+                        <SwiperSlide key={item.id}>
+                          <ViewItem>
+                            <ViewDescription>
+                              <h3>{item.heading}</h3>
+                              <p>{item.description}</p>
+                            </ViewDescription>
+                            <ViewImage>
+                              <img src={item.imageSrc} alt={item.heading} />
+                            </ViewImage>
+                          </ViewItem>
+                        </SwiperSlide>
+                      ))
+                    }
+                  </Swiper>
+                </ViewContainer>
+                <PreviewContainer>
+                  <Swiper
+                    loop={true}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    onSwiper={(swiper) => {
+                      swiperPreviewRef.current = swiper
+                    }}
+                    allowTouchMove={false}
+                  >
+                    {
+                      previewItems.map((item) => (
+                        <SwiperSlide key={item.id}>
+                          <PreviewItem>
+                            <img src={item.imageSrc} alt={item.heading} draggable="false" />
+                          </PreviewItem>
+                        </SwiperSlide>
+                      ))
+                    }
+                  </Swiper>
+                </PreviewContainer>
+              </div>
+            </DeskTopContents>
+          ) : (
+            <MobileContents>
+              <ul>
+                <li>
+                  <div className="info">
+                    <span>Vision</span>
+                    <p>케듀올은 AI 기반 맞춤형 학습 시스템으로 누구나 쉽게 한국어를 배우고, 한국 문화를 이해하며, 언어 장벽을 낮추고 교육의 질을 높이는 교육 환경을 제공합니다.</p>
+                  </div>
+                  <div className="img">
+                    <img src="/images/about-banner-01.png" alt="Vision" />
+                  </div>
+                </li>
+                <li>
+                  <div className="info">
+                    <span>Core Value</span>
+                    <p>KEDUALL은 혁신과 신뢰를 바탕으로 AI 맞춤 학습을 통해 개인 역량을 강화하고, 학습자와 강사가 함께 성장하는 글로벌 교육 플랫폼을 지향합니다.</p>
+                  </div>
+                  <div className="img">
+                    <img src="/images/about-banner-02.png" alt="Core Value" />
+                  </div>
+                </li>
+                <li>
+                  <div className="info">
+                    <span>Business Strategy</span>
+                    <p>KEDUALL은 AI를 활용한 맞춤 학습과 K-컬처 연계 프로그램으로 언어 교육을 넘어 커리어 기회를 제공하며, 사용자 중심의 혁신 플랫폼으로 성장합니다.</p>
+                  </div>
+                  <div className="img">
+                    <img src="/images/about-banner-03.png" alt="Business Strategy" />
+                  </div>
+                </li>
+              </ul>
+            </MobileContents>
+          )
+        }
       </Section>
     </MainAboutContainer>
   );
 };
 
 const MainAboutContainer = styled.div`
-  padding: 160px 0 160px 80px;
+  padding: 80px 36px 80px;
   background-color: #f4f4f4;
+
+  @media screen and (min-width: 768px) {
+    padding: 100px 46px 100px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 160px 80px 160px;
+  }
 `
 
-const Contents = styled.div`
+const DeskTopContents = styled.div`
   width: 100%;
   margin-top: 120px;
   display: flex;
@@ -199,6 +251,8 @@ const Contents = styled.div`
     gap: 5%;
     margin-right: -20%;
   }
+
+
 `;
 
 const ViewContainer = styled.div`
@@ -293,6 +347,87 @@ const PreviewItem = styled.div`
     -webkit-user-drag: none; /* Safari, Chrome */
     user-drag: none; /* Standard */
     pointer-events: none; /* 이미지 자체에 대한 마우스 이벤트 비활성화 (필요한 경우) */
+  }
+`;
+
+const MobileContents = styled.div`
+  width: 100%;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 64px;
+
+    li {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 14px 20px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 2;
+
+        p {
+          font-size: 146x;
+          line-height: 1.4;
+          word-break: keep-all;
+        }
+      }
+
+      span {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333333;
+      }
+      
+      .img {
+        width: 246px;
+        
+        img {
+          height: 100%;
+        }
+      }
+    }    
+  }
+
+  @media screen and (max-width: 410px) {
+    .info {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    li {
+      height: 140px;
+
+      .info {
+        width: 100%;
+      }
+      img {
+        visibility: hidden;
+      }
+    }
+  }
+  @media screen and (min-width: 640px) {
+    span {
+      font-size: 24px;
+    }
+
+    .info {
+      width: 50%;
+    }
+    width: 100%;
   }
 `;
 

@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger) // ScrollTrigger 플러그인 등록
 
 const Introduction = () => {
-  const subTitleRef = useRef(null);
+  const brandRef = useRef(null);
   const introRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Introduction = () => {
       onEnter: () => {
         let tl = gsap.timeline();
 
-        tl.to(subTitleRef.current, {
+        tl.to(brandRef.current, {
           x: '1%',
           opacity: 1,
           duration: 0.4,
@@ -37,10 +37,12 @@ const Introduction = () => {
 
   return (
     <IntroductionContainer className="intro-container">
-      <SubTitle ref={subTitleRef} className="opacity-0 pl-[86px]">KeduAll</SubTitle>
-      <div ref={introRef} className="text-right opacity-0 pr-[70px] mt-[30px]">
-        <div className="inline-block text-[var(--text-black)] mr-2">Shaping the future of </div>
-        <div className="inline-block text-[var(--secondary)]">Korean education</div>
+      <Brand>
+        <h3 ref={brandRef} className="opacity-0">KeduAll</h3>
+      </Brand>
+      <div ref={introRef} className="brand-desc-wrap opacity-0">
+        <div className="brand-desc">Shaping the future of </div>
+        <div className="brand-desc">Korean education</div>
       </div>
     </IntroductionContainer>
   );
@@ -48,38 +50,124 @@ const Introduction = () => {
 
 const IntroductionContainer = styled.div`
   width: 100%;
-  padding: 86px 0;
+  padding: 32px 0;
 
-  div {
-    font-size: 60px;
+  .brand-desc {
+    display: inline-block;
+    font-size: 18px;
     font-weight: 500;
-    letter-spacing: -2px;
-    word-spacing: 2px;
+    margin-top: 12px;
+
+    &:first-child {
+      color: var(--text-black);
+      margin-right: 8px;
+    }
+    &:last-child {
+      color: var(--secondary)
+    }
+  }
+
+  @media screen and (max-width: 410px) {
+    .brand-desc-wrap {
+      text-align: center;
+    }
+  }
+  
+  @media screen and (min-width: 410px) {
+    .brand-desc {
+      font-size: 22px;
+    }
+    .brand-desc-wrap {
+      text-align: right;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 32px 46px 32px 0;
+
+    .brand-desc {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 86px 0;
+    
+    .brand-desc {
+      margin-top: 30px;
+      font-size: 60px;
+    }
   }
 `;
 
-const SubTitle = styled.h3`
-  display: block;
-  font-size: 120px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--primary);
-  letter-spacing: 1px;
-  position: relative;
-  opacity: 0;
+const Brand = styled.div`
+  padding-left: 32px;
 
-  &::before {
-    content: '';
-    display: block;
-    width: 128px;
-    height: 128px;
-    background-color: #FFCD85;
-    border-radius: 50%;
-    position: absolute;
-    left: 54px;
-    top: 20px;
-    transform: translateY(-50%);
-    z-index: -1;
+  @media screen and (max-width: 410px) {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  h3 {
+    display: inline-block;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--primary);
+    letter-spacing: 1px;
+    position: relative;
+    opacity: 0;
+
+    &::before {
+      content: '';
+      display: block;
+      background-color: #FFCD85;
+      border-radius: 50%;
+      position: absolute;
+      transform: translateY(-50%);
+      z-index: -1;
+      width: 24px;
+      height: 24px;
+      left: -5px;
+      top: 7px;
+    }
+
+    font-size: 24px;
+
+
+
+    @media screen and (min-width: 410px) {
+      font-size: 42px;
+
+      &::before {
+        width: 45px;
+        height: 45px;
+        left: -11px;
+        top: 10px;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      font-size: 64px;
+
+      &::before {
+        width: 66px;
+        height: 66px;
+        left: -12px;
+        top: 16px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 120px;
+      &::before {
+        width: 128px;
+        height: 128px;
+        left: -30px;
+        top: 30px;
+      }
+    }
   }
 `;
 

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const MainContact = () => {
   return (
-    <MainContactContainer>
+    <MainContactContainer id="contact">
       <Contents>
         <div className="left">
-          <Heading>CONTACT US</Heading>
+          <Heading className="title">CONTACT US</Heading>
         </div>
         <div className="right">
           <ul>
@@ -32,9 +32,14 @@ const MainContact = () => {
 
 const MainContactContainer = styled.div`
   padding: 0 80px 60px;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 36px 60px;
+  }
 `;
 
 const Contents = styled.div`
+  width: 100%;
   display: flex;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
@@ -56,7 +61,7 @@ const Contents = styled.div`
     
     span {
       display: inline-block;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--primary);
       position: relative;
@@ -83,10 +88,46 @@ const Contents = styled.div`
       font-weight: 500;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    border: none;
+    .left {
+      display: none;
+    }
+    .right {
+      padding: 46px 0;
+    }
+    .right ul {
+      gap: 30px;
+    }
+    .right p {
+      font-size: 18px;
+    }
+  }
+
+  .left, .right {
+    border: none;
+
+    @media screen and (min-width: 768px) {
+      span {
+        font-size: 16px;
+      }
+      p {
+        font-size: 24px;
+      }
+    }
+    @media screen and (min-width: 1024px) {
+      span {
+        font-size: 16px;
+      }
+      p {
+        font-size: 24px;
+      }
+    }
+  }
 `;
 
 const Heading = styled.h3`
-  font-size: 84px;
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 1px;
@@ -106,6 +147,16 @@ const Heading = styled.h3`
     border-radius: 50%;
     background-color: #FFCD85;
   }
+  
+  font-size: 24px;
+
+   @media screen and (min-width: 768px) {
+    font-size: 62px !important;
+   }
+
+   @media screen and (min-width: 1024px) {
+      font-size: 84px;
+    }
 `;
 
 

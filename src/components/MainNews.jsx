@@ -5,6 +5,7 @@ import Description from './Description';
 import NewsItem from './NewsItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { NavLink } from 'react-router';
+import useDeviceType from '../hooks/useDeviceType';
 
 const props = {
   heading: 'NEWS & NOTICE',
@@ -42,8 +43,14 @@ const MainNews = () => {
   const [current, setCurrent] = useState(0);
   const swiperRef = useRef(null);
   const swiperPreviewRef = useRef(null);
+  const deviceType = useDeviceType();
+
+  useEffect(() => {
+    console.log("deviceType: ", deviceType);
+  }, [deviceType])
+
   return (
-    <MainNewsContainer>
+    <MainNewsContainer id="press">
       <Top>
         <div>
           <Heading>{props.heading}</Heading>
@@ -76,7 +83,7 @@ const MainNews = () => {
             </div>
             <span className="total font-concept text-[#999999]">0{newsItems.length}</span>
           </div>
-          <Link to="/resources/press"><span>뉴스 바로가기</span><img src="/icons/chevron_right.svg" alt="이동 아이콘" /></Link>
+          <Link to="/"><span>뉴스 바로가기</span><img src="/icons/chevron_right.svg" alt="이동 아이콘" /></Link>
         </Pagination>
       </Top>
 
@@ -138,11 +145,19 @@ const MainNews = () => {
 };
 
 const MainNewsContainer = styled.div`
-  padding: 160px 80px 0;
+  padding: 80px 36px 80px;
+
+  @media screen and (min-width: 768px) {
+    padding: 100px 46px 100px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 160px 80px 160px;
+  }
 `
 
 const Contents = styled.div`
-  margin-top: 40px;
+
   display: flex;
   border-top: 1px solid #e8e8e8;
 
@@ -156,12 +171,31 @@ const Contents = styled.div`
     width: 40%;
     padding: 50px 30px 26px 56px;
   }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width: 768px) {
+    border-top: none;
+    margin-top: 18px;
+
+    .left {
+      width: 100%;
+      padding: 0 0 50px;
+      border-right: none;
+    }
+    .right {
+      display: none;
+    }
+  }
 `
 const Top = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 46px;
 `;
 
 const Pagination = styled.div`
@@ -187,6 +221,11 @@ const Pagination = styled.div`
       border-radius: 50%;
       background-color: rgba(0, 0, 0, .2);
     }
+  }
+
+  @media screen and (max-width: 410px) {
+    width: 100%;
+    justify-content: space-between;
   }
 `;
 

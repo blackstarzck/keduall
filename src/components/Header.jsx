@@ -1,64 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
+import MobileMenuContainer from './MobileMenuContainer';
+import { menuItems } from '../data/menuItems';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // URL 해시 변경 시 스크롤 처리
+  useEffect(() => {
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]); // location 변경 시 실행
+
   return (
     <header>
-      <HeaderContainer className="header-container">
+      <HeaderContainer className={ isMenuOpen ? 'mobile-menu-open' : '' }>
+        <GnbNav>
+          <GnbList className="gnb-list">
+            {menuItems.map((item, idx) => (
+              <li key={idx}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    location.hash === item.path || (item.path === '/' && location.pathname === '/')
+                      ? 'active'
+                      : ''
+                  }
+                >
+                  {item.title}
+                </NavLink>
+                {item.subItems.length > 0 && (
+                  <SnbList>
+                    {item.subItems.map((subItem, idx) => (
+                      <li key={idx}>
+                        <NavLink
+                          to={subItem.path}
+                          className={({ isActive }) =>
+                            location.hash === subItem.path ? 'active' : ''
+                          }
+                        >
+                          {subItem.title}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </SnbList>
+                )}
+              </li>
+            ))}
+          </GnbList>
+        </GnbNav>
         <Logo><NavLink to="/"></NavLink></Logo>
-          <GnbNav>
-            <GnbList className="gnb-list">
-              <li>
-                <NavLink to="/company">COMPANY</NavLink>
-                <SnbList>
-                  <li><NavLink  to="/company/about">회사소개</NavLink ></li>
-                  <li><NavLink  to="/company/value">핵심가치</NavLink ></li>
-                  <li><NavLink  to="/company/vision">비전</NavLink ></li>
-                  <li><NavLink  to="/company/history">연혁</NavLink ></li>
-                </SnbList>
-              </li>
-              <li>
-                <NavLink  to="/service">SERVICE</NavLink>
-                <SnbList>
-                  <li><NavLink to="/service/language">한국어 강의</NavLink></li>
-                  <li><NavLink to="/service/ai">AI 학습</NavLink></li>
-                  <li><NavLink to="/service/study">유학 및 취업 지원</NavLink></li>
-                </SnbList>
-              </li>
-              <li>
-                <NavLink to="/career">CAREER</NavLink>
-                <SnbList>
-                  <li><NavLink to="/career/talent">인재상</NavLink></li>
-                  <li><NavLink to="/career/process">채용절차</NavLink></li>
-                  <li><NavLink to="/career/department">채용부문</NavLink></li>
-                  <li><NavLink to="/career/notice">채용채용공고</NavLink></li>
-                </SnbList>
-              </li>
-              <li>
-                <NavLink to="/resources">RESOURCES</NavLink>
-                <SnbList>
-                  <li><NavLink to="/resources/press">보도자료</NavLink></li>
-                  <li><NavLink to="/resources/blog">블로그</NavLink></li>
-                  <li><NavLink to="/resources/sns">SNS</NavLink></li>
-                </SnbList>
-              </li>
-              <li>
-                <NavLink to="/contact">CONTACT</NavLink>
-              </li>
-            </GnbList>
-          </GnbNav>
+        <MenuButton
+          onClick={() => {
+            setIsMenuOpen(!isMenuOpen);
+          }}
+        >
+          <img src={isMenuOpen ? "/icons/close-dark.svg" : "/icons/menu-white.svg"} alt="메뉴" />
+        </MenuButton>
+        <MobileMenuContainer isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </HeaderContainer>
+      { `${isMenuOpen}` }
     </header>
   );
 };
 
 const HeaderContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 100px;
   padding: 0 30px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -69,12 +83,22 @@ const HeaderContainer = styled.div`
   // background: rgba(255, 255, 255, 0.2);
   background-color: rgba(96, 97, 119, .4);
   backdrop-filter: blur(10px);
+
+  &.mobile-menu-open h1 a {
+    background-image: url("/images/keduall_dark.png");
+  }
 `;
 
 const Logo = styled.h1`
   display: block;
-  width: 150px;
-  height: 50px;
+  width: 86px;
+
+  position: absolute;
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+  z-index: 100;
 
   a {
     display: block;
@@ -84,15 +108,24 @@ const Logo = styled.h1`
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all .3s ease;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 150px;
+    height: 50px;
+    left: 46px;
   }
 `;
 
 
 const GnbNav = styled.nav`
+  width: 60%;
+  height: 98px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
+  margin: 0 auto;
 
   &::after {
     content: "";
@@ -107,18 +140,26 @@ const GnbNav = styled.nav`
     transition: all .3s ease;
   }
 
-  &:hover {
-    &::after {
-      height: calc(100vh / 2);
-      transition: all .3s ease;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    }
+  &:hover ~ h1 a {
+    background-image: url("/images/keduall_dark.png");
+  }
 
-    ul {
-      opacity: 1;
+  @media screen and (min-width: 1024px) {
 
-      li a {
-        color: var(--text-default);
+
+    &:hover {
+      &::after {
+        height: calc(100vh / 2);
+        transition: all .3s ease;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      ul {
+        opacity: 1;
+
+        li a {
+          color: var(--text-default);
+        }
       }
     }
   }
@@ -126,13 +167,13 @@ const GnbNav = styled.nav`
 
 const GnbList = styled.ul`
   width: 100%;
-  display: flex;
+  display: none;
+  align-items: center;
   gap: 5px;
-  padding: 40px 0;
 
   & > li {
     position: relative;
-    width: calc(100% / 5);
+    width: calc(100% / 4);
     text-align: center;
 
     & > a {
@@ -146,6 +187,12 @@ const GnbList = styled.ul`
       & > a {
         color: var(--primary) !important  ;
       }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    & {
+      display: flex;
     }
   }
 `;
@@ -164,6 +211,29 @@ const SnbList = styled.ul`
 
   li {
     word-break: keep-all;
+  }
+`;
+
+const MenuButton = styled.button`
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-16px, -50%);
+  z-index: 100;
+
+  @media screen and (min-width: 1024px) {
+    transform: translate(-50%, -50%);
+  }
+
+  @media screen and (min-width: 1024px) {
+    & {
+      display: none;
+    }
   }
 `;
 

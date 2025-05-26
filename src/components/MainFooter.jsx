@@ -4,9 +4,9 @@ import styled from "styled-components";
 const MainFooter = () => {
   return (
     <MainFooterContainer>
-      <div className="logo">
+      <h1 className="logo">
         <img src="/images/keduall_dark.png" alt="로고" />
-      </div>
+      </h1>
       <div className="info">
         <div>
           <p>경기 김포시 태장로 755 ㅣ 사업자 등록번호 : 107-82-18122 ㅣ 대표이사 서지석</p>
@@ -29,7 +29,9 @@ const MainFooterContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-
+    p {
+      word-break: keep-all;
+    }
     p:first-child {
       font-size: 14px;
       color: #5e5e5e;
@@ -53,6 +55,14 @@ const MainFooterContainer = styled.div`
     img {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0 36px 44px;
+
+    .info > div {
+      padding-left: 0;
     }
   }
 `

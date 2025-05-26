@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://www.keduall.com/sitemap.xml

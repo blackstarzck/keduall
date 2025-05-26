@@ -18,6 +18,8 @@ const NewsItem = ({ imgSrc, category, title, date, link }) => {
 };
 
 const NewsItemContainer = styled(NavLink)`
+  display: block;
+
   .tumbnail {
     margin-bottom: 14px;
     
@@ -33,13 +35,13 @@ const NewsItemContainer = styled(NavLink)`
 
   .category {
     color: var(--primary);
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
     margin-bottom: 14px;
   }
 
   .title {
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 500;
     margin-bottom: 30px;
     white-space: nowrap;
@@ -48,8 +50,32 @@ const NewsItemContainer = styled(NavLink)`
   }
 
   .date {
-    font-size: 16px;
+    font-size: 12px;
     color: #5e5e5e;
+  }
+
+  @media screen and (min-width: 768px) {
+    .categor {
+      font-size: 14px;
+    }
+    .title {
+      font-size: 24px;
+    }
+    .date {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .categor {
+      font-size: 16px;
+    }
+    .title {
+      font-size: 30px;
+    }
+    .date {
+      font-size: 16px;
+    }
   }
 `;
 

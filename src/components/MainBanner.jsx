@@ -81,11 +81,11 @@ const MainBanner = () => {
       </Swiper>
       <Pagination>
         <div className="pagination-container">
-          <span className="current font-concept">0{currentSlide}</span>
+          <span className="current font-concept font-bold">0{currentSlide}</span>
           <div className="progress">
             <div ref={timerRef} className="bar"></div>
           </div>
-          <span className="total font-concept">0{bannerItems.length}</span>
+          <span className="total font-concept font-bold">0{bannerItems.length}</span>
           <div className="arrows">
             <button onClick={() => swiperRef.current.slidePrev()} className="prev"><img src="/icons/arrow-left-white.svg" alt="이전" /></button>
             <button onClick={() => swiperRef.current.slideNext()} className="next"><img src="/icons/arrow-right-white.svg" alt="다음" /></button>
@@ -121,6 +121,7 @@ const Description = styled.div`
   transform: translate(-50%, -56%);
   transition: all 0.3s ease-in-out .3s;
   opacity: 0;
+  padding: 0 16px;
 
   &.active {
     opacity: 1;
@@ -132,13 +133,31 @@ const Description = styled.div`
     font-weight: 700;
     color: #FFFFFF;
     margin-bottom: 20px;
+    word-break: keep-all;
   }
   p {
     font-size: 24px;
     font-weight: 300;
     color: #FFFFFF;
     line-height: 1.4;
-    letter-spacing: -1px;
+  }
+
+  @media screen and (min-width: 360px) {
+    h2 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
+    
+  @media screen and (min-width: 768px) {
+    h2 {
+      font-size: 46px;
+    }
+    p {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -165,6 +184,10 @@ const Pagination = styled.div`
     gap: 16px;
   }
 
+  .current, .total {
+    // font-family: 'Myriad Variable Concept'; 
+  }
+
   .progress {
     width: 142px;
     height: 3px;
@@ -183,18 +206,18 @@ const Pagination = styled.div`
     }
   }
 
-    button {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-      &.prev {
-        margin-right: 8px;
-      }
-      &.play-pause {
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, .2);
-      }
+  button {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    &.prev {
+      margin-right: 8px;
     }
+    &.play-pause {
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, .2);
+    }
+  }
 `;
 
 export default MainBanner;
