@@ -85,7 +85,7 @@ const HeaderContainer = styled.div`
   backdrop-filter: blur(10px);
 
   &.mobile-menu-open h1 a {
-    background-image: url("/images/keduall_dark.png");
+    background-image: url("/images/logo_dark.png");
   }
 `;
 
@@ -104,7 +104,7 @@ const Logo = styled.h1`
     display: block;
     width: 100%;
     height: 50px;
-    background-image: url("/images/keduall_white.png");
+    background-image: url("/images/logo_white.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -141,7 +141,7 @@ const GnbNav = styled.nav`
   }
 
   &:hover ~ h1 a {
-    background-image: url("/images/keduall_dark.png");
+    background-image: url("/images/logo_dark.png");
   }
 
   @media screen and (min-width: 1024px) {

@@ -5,7 +5,7 @@ const MainFooter = () => {
   return (
     <MainFooterContainer>
       <h1 className="logo">
-        <img src="/images/keduall_dark.png" alt="로고" />
+        <img src="/images/logo_dark.png" alt="로고" />
       </h1>
       <div className="info">
         <div>

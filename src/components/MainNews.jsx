@@ -20,13 +20,21 @@ const newsItems = [
     id: 1,
     imgSrc: "images/news-thumb-01.png",
     category: "NEWS",
-    title: "‘2024 대한민국 동반성장 대상’ 최우수 명예기업 수상",
-    date: "2024. 04. 07",
+    title: "㈜케듀올-베트남 TMA, 에듀테크 플랫폼 개발 계약 체결",
+    date: "2024. 04. 01",
     link: "#"
   },
   {
     id: 2,
     imgSrc: "images/news-thumb-02.png",
+    category: "NEWS",
+    title: "‘2024 대한민국 동반성장 대상’ 최우수 명예기업 수상",
+    date: "2024. 04. 07",
+    link: "#"
+  },
+  {
+    id: 3,
+    imgSrc: "images/news-thumb-03.png",
     category: "NEWS",
     title: "제 30회 기업혁신 대상 시상식 ESG 경영에서 대상 수상",
     date: "2025. 05. 10",

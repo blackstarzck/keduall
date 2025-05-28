@@ -18,7 +18,7 @@ const MainContact = () => {
               <p>jett@keduall.com</p>
             </li>
             <li>
-              <span>ADRESS</span>
+              <span>ADDRESS</span>
               <p>경기도 김포시 태장로 755</p>
             </li>
           </ul>
