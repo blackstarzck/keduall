@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { NavLink, useLocation } from 'react-router';
 import MobileMenuContainer from './MobileMenuContainer';
@@ -6,7 +6,27 @@ import { menuItems } from '../data/menuItems';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHover, setIsHover] = useState(false);
   const location = useLocation();
+  const gnbNavRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseEnter = () => {
+      setIsHover(true);
+    }
+
+    const handleMouseLeave = () => {
+      setIsHover(false);
+    }
+
+    gnbNavRef.current?.addEventListener('mouseenter', handleMouseEnter);
+    gnbNavRef.current?.addEventListener('mouseleave', handleMouseLeave); 
+
+    return () => {
+      gnbNavRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      gnbNavRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+    }
+  }, []);
 
   // URL 해시 변경 시 스크롤 처리
   useEffect(() => {
@@ -22,7 +42,7 @@ const Header = () => {
   return (
     <header>
       <HeaderContainer className={ isMenuOpen ? 'mobile-menu-open' : '' }>
-        <GnbNav>
+        <GnbNav ref={gnbNavRef}>
           <GnbList className="gnb-list">
             {menuItems.map((item, idx) => (
               <li key={idx}>
@@ -56,7 +76,7 @@ const Header = () => {
             ))}
           </GnbList>
         </GnbNav>
-        <Logo><NavLink to="/"></NavLink></Logo>
+        <Logo><NavLink to="/"><img src={(isHover || isMenuOpen) ? "/images/logo_dark.png" : "/images/logo_white.png"} alt="케듀올 로고" /></NavLink></Logo>
         <MenuButton
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
@@ -91,8 +111,6 @@ const HeaderContainer = styled.div`
 
 const Logo = styled.h1`
   display: block;
-  width: 86px;
-
   position: absolute;
   left: 16px;
   top: 50%;
@@ -104,11 +122,11 @@ const Logo = styled.h1`
     display: block;
     width: 100%;
     height: 50px;
-    background-image: url("/images/logo_white.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: all .3s ease;
+
+    img {
+      height: 100%;
+      transition: all .3s ease;[
+    }
   }
 
   @media screen and (min-width: 1024px) {
@@ -140,13 +158,7 @@ const GnbNav = styled.nav`
     transition: all .3s ease;
   }
 
-  &:hover ~ h1 a {
-    background-image: url("/images/logo_dark.png");
-  }
-
   @media screen and (min-width: 1024px) {
-
-
     &:hover {
       &::after {
         height: calc(100vh / 2);
