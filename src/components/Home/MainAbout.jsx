@@ -1,44 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Section from './Section';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { _checkPlugin } from 'gsap/gsap-core';
-import useDeviceType from '../hooks/useDeviceType';
-
-const props = {
-  heading: 'ABOUT',
-  description: <>
-    <span className="block">지능형 기술로 확장하는 한국어 교육</span>
-    <span className="block">배움을 넘어 진로까지 연결하고</span>
-    <span className="block">모두를 위한 지속 가능한 성장을 이끕니다</span>
-  </>
-}
-
-const viewItems = [
-  {
-    id: 1,
-    heading: 'Vision',
-    description: '케듀올은 전 세계 누구나 쉽고 자유롭게 한국어를 배울 수 있는 환경을 만듭니다. 우리는 AI 기반의 지능형 학습 시스템을 통해 개인 맞춤형 교육 경험을 제공하며, 단순한 언어 학습을 넘어 한국 문화와 장체성까지 함께이해하고 경험할 수 있도록 돕습니다. 언어의 장벽을 낮추고, 교육의 질을 높이며, 문화를 연결하는 것, 그것이 케듀올이 지향하는 교육의 미래입니다.',
-    imageSrc: '/images/about-banner-01.png'
-  },
-  {
-    id: 2,
-    heading: 'Core Value',
-    description: 'KEDUALL은 "언어를 넘어, 미래를 연결하는 교육 플랫폼"을 지향합니다. 이는 지속 가능한 성장을 위해 개인의 역량을 강화하고, AI 기반 맞춤형 학습 솔루션을 제공하여 누구나 자신의 목표에 도달할 수 있도록 돕는다는 의미입니다. KEDUALL은 혁신과 신뢰를 핵심 가치로 삼아, 학습자와 강사가 함께 성장하는 생태계를 만들어갑니다. 열정을 바탕으로 글로벌 사회에서 새로운 가능성을 열어가는 여정을 함께합니다.',
-    imageSrc: '/images/about-banner-02.png'
-  },
-  {
-    id: 3,
-    heading: 'Business Strategy',
-    description: 'KEDUALL은 "AI와 글로벌 커리어를 잇는 새로운 교육의 기준"을 제시합니다. AI 기술을 활용하여 개인별 맞춤형 학습 경험을 제공하고, 언어 교육을 넘어 실제 커리어로 이어지는 기회를 창출합니다. 또한 K-컬처 연계 프로그램을 통해 한국어와 문화를 동시에 배우는 차별화된 경험을 제공합니다. 끊임없는 플랫폼 혁신을 통해 사용자 중심의 서비스를 강화하며, 미래형 교육 플랫폼으로 성장해 나가고자 합니다',
-    imageSrc: '/images/about-banner-03.png'
-  }
-];
-
-const previewItems = viewItems.reduce((acc, item, index, arr) => {
-  if (index === 0) return acc; // 첫 번째 요소는 추가하지 않음
-  return [...acc, item]; // 나머지 요소 추가
-}, []).concat(viewItems[0]); // 첫 번째 요소를 마지막에 추가
+import { mainItems } from '../../data/sectionItems';
+import useDeviceType from '../../hooks/useDeviceType';
+import Section from './Section';
 
 const MainAbout = () => {
   const [current, setCurrent] = useState(0);
@@ -46,21 +11,22 @@ const MainAbout = () => {
   const swiperRef = useRef(null);
   const swiperPreviewRef = useRef(null);
   const deviceType = useDeviceType();
+  const { props, viewItems, previewItems } = mainItems.mainAbout;
 
   useEffect(() => {
-    console.log("deviceType: ", deviceType);
+    // console.log("deviceType: ", deviceType);
 
   }, [deviceType])
 
   return (
     <MainAboutContainer id="about">
       <Section {...props}>
-        { 
+        {
           deviceType === 'desktop' ? (
             <DeskTopContents>
               <div className="left">
                 <ul>
-                {
+                  {
                     viewItems.map((item) => (
                       <li
                         key={item.id}
@@ -130,7 +96,7 @@ const MainAbout = () => {
                     allowTouchMove={false}
                   >
                     {
-                      previewItems.map((item) => (
+                      previewItems && previewItems.map((item) => (
                         <SwiperSlide key={item.id}>
                           <PreviewItem>
                             <img src={item.imageSrc} alt={item.heading} draggable="false" />
@@ -145,33 +111,19 @@ const MainAbout = () => {
           ) : (
             <MobileContents>
               <ul>
-                <li>
-                  <div className="info">
-                    <span>Vision</span>
-                    <p>케듀올은 AI 기반 맞춤형 학습 시스템으로 누구나 쉽게 한국어를 배우고, 한국 문화를 이해하며, 언어 장벽을 낮추고 교육의 질을 높이는 교육 환경을 제공합니다.</p>
-                  </div>
-                  <div className="img">
-                    <img src="/images/about-banner-01.png" alt="Vision" />
-                  </div>
-                </li>
-                <li>
-                  <div className="info">
-                    <span>Core Value</span>
-                    <p>KEDUALL은 혁신과 신뢰를 바탕으로 AI 맞춤 학습을 통해 개인 역량을 강화하고, 학습자와 강사가 함께 성장하는 글로벌 교육 플랫폼을 지향합니다.</p>
-                  </div>
-                  <div className="img">
-                    <img src="/images/about-banner-02.png" alt="Core Value" />
-                  </div>
-                </li>
-                <li>
-                  <div className="info">
-                    <span>Business Strategy</span>
-                    <p>KEDUALL은 AI를 활용한 맞춤 학습과 K-컬처 연계 프로그램으로 언어 교육을 넘어 커리어 기회를 제공하며, 사용자 중심의 혁신 플랫폼으로 성장합니다.</p>
-                  </div>
-                  <div className="img">
-                    <img src="/images/about-banner-03.png" alt="Business Strategy" />
-                  </div>
-                </li>
+                {
+                  viewItems.map((item, idx) => (
+                  <li key={item.id}>
+                    <div className="info">
+                        <span>{item.heading}</span>
+                        <p>{item.description}</p>
+                    </div>
+                    <div className="img">
+                        <img src={item.imageSrc} alt={item.heading} />
+                    </div>
+                  </li>
+                  ))
+                }
               </ul>
             </MobileContents>
           )
@@ -304,7 +256,7 @@ const ViewDescription = styled.div`
     top: 0;
     left: 0;
   }
-  
+
   &::after {
     content: '';
     width: 62%;
@@ -389,15 +341,15 @@ const MobileContents = styled.div`
         font-weight: 500;
         color: #333333;
       }
-      
+
       .img {
         width: 246px;
-        
+
         img {
           height: 100%;
         }
       }
-    }    
+    }
   }
 
   @media screen and (max-width: 410px) {

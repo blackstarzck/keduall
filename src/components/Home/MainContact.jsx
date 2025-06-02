@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { mainItems } from '../../data/sectionItems';
 
 const MainContact = () => {
+  const { phone, email, address } = mainItems.contact;
+
   return (
     <MainContactContainer id="contact">
       <Contents>
@@ -11,15 +14,15 @@ const MainContact = () => {
           <ul>
               <li>
                 <span>CONTACT</span>
-                <p>031 983 0000</p>
+                <p>{phone}</p>
             </li>
             <li>
               <span>E-MAIL</span>
-              <p>jett@keduall.com</p>
+              <p>{email}</p>
             </li>
             <li>
               <span>ADDRESS</span>
-              <p>경기도 김포시 태장로 755</p>
+              <p>{address}</p>
             </li>
           </ul>
         </div>
@@ -58,7 +61,7 @@ const Contents = styled.div`
       flex-direction: column;
       gap: 62px;
     }
-    
+
     span {
       display: inline-block;
       font-size: 14px;
@@ -147,7 +150,7 @@ const Heading = styled.h3`
     border-radius: 50%;
     background-color: #FFCD85;
   }
-  
+
   font-size: 24px;
 
    @media screen and (min-width: 768px) {

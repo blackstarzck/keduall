@@ -13,11 +13,13 @@
 
   --text-black: #000000;
   --text-default: #424242;
+  --text-section-title: #333333;
 
   --primary: #0F3060;
   --secondary: #FFAE2C;
 
   --disabled: #999999;
+  --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 * {

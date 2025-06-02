@@ -1,8 +1,8 @@
 import gsap from 'gsap';
 import React, { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { menuItems } from '../data/menuItems';
-import { NavLink } from 'react-router';
+import { menuItems } from '../../data/menuItems';
 
 const MobileMenuContainer = ({ isMenuOpen, setIsMenuOpen }) => {
   const menuRef = useRef(null);
@@ -36,26 +36,31 @@ const MobileMenuContainer = ({ isMenuOpen, setIsMenuOpen }) => {
 
   const handleNavLinkClick = () => {
     setIsMenuOpen(false);
-    
+
     gsap.to(menuRef.current, {
       right: '-100%',
       duration: 0.3,
       ease: 'power2.inOut',
       onComplete: () => {
         setOpenIndex(null); // Close all accordion panels
-
       },
     });
   };
 
   return (
-    <MenuContainer ref={menuRef}>
+    <MenuContainer ref={menuRef} id="mobile-menu-container">
       <GnbNav>
         <GnbList className="gnb-list">
           {menuItems.map((item, idx) => (
             <li key={idx} className={item.subItems.length === 0 ? 'no-arrow' : ''}>
               <AccordionHeader onClick={() => toggleAccordion(idx)} $isOpen={openIndex === idx}>
-                <span>{item.title}</span>
+                {
+                  item.subItems.length > 0 ? (
+                    <span>{item.title}</span>
+                  ): (
+                    <NavLink to={item.path}>{item.title}</NavLink>
+                  )
+                }
               </AccordionHeader>
               {item.subItems.length > 0 && (
                 <AccordionBody ref={(el) => (accordionRefs.current[idx] = el)}>
@@ -106,8 +111,8 @@ const AccordionHeader = styled.div`
   justify-content: space-between;
   cursor: pointer;
   padding: 15px 0;
-  
-  span {
+
+  span, a {
     font-weight: 600;
     font-size: 24px;
   }
@@ -128,7 +133,7 @@ const AccordionHeader = styled.div`
 
 const AccordionBody = styled.div`
   overflow: hidden;
-  height: 0; 
+  height: 0;
 `;
 
 const SnbList = styled.ul`

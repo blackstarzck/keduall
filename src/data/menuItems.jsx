@@ -42,29 +42,29 @@
 //     path: '/contact',
 //     subItems: []
 //   }
-// ]; 
+// ];
 
 
 export const menuItems = [
   {
     title: 'COMPANY',
-    path: '#about',
+    // path: '/#about',
     subItems: [
       // { title: '회사소개', path: '/' },
       // { title: '핵심가치', path: '/' },
-      { title: '비전', path: '#about' },
-      { title: '핵심 가치', path: '#about' },
-      { title: '비즈니스 전략', path: '#about' },
+      { title: '비전', path: '/#about' },
+      { title: '핵심 가치', path: '/#about' },
+      { title: '비즈니스 전략', path: '/#about' },
       // { title: '연혁', path: '/' }
     ]
   },
   {
     title: 'SERVICE',
-    path: '#work',
+    // path: '/#work',
     subItems: [
-      { title: '한국어 강의', path: '#work' },
-      { title: 'AI 학습', path: '#work' },
-      { title: '유학 및 취업 지원', path: '#work' }
+      { title: '한국어 강의', path: '/#work' },
+      { title: 'AI 학습', path: '/#work' },
+      { title: '유학 및 취업 지원', path: '/#work' }
     ]
   },
   // {
@@ -79,16 +79,21 @@ export const menuItems = [
   // },
   {
     title: 'RESOURCES',
-    path: '#press',
+    // path: '/#press',
     subItems: [
-      { title: '보도자료', path: '#press' },
+      { title: '보도자료', path: '/#press' },
       // { title: '블로그', path: '/' },
       // { title: 'SNS', path: '/' }
     ]
   },
   {
     title: 'CONTACT',
-    path: '#contact',
+    path: '/#contact',
+    subItems: [],
+  },
+  {
+    title: <span className="">STUDY ABROAD</span>,
+    path: '/study-abroad',
     subItems: [],
   }
-]; 
+];

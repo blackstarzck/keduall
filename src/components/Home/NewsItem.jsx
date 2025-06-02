@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NewsItem = ({ imgSrc, category, title, date, link }) => {
@@ -22,7 +22,7 @@ const NewsItemContainer = styled(NavLink)`
 
   .tumbnail {
     margin-bottom: 14px;
-    
+
     img {
       width: 100%;
     }

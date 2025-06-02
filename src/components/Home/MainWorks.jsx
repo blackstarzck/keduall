@@ -1,73 +1,19 @@
-import React, { useEffect } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { mainItems } from '../../data/sectionItems';
+import useDeviceType from '../../hooks/useDeviceType';
 import Section from './Section';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useDeviceType from '../hooks/useDeviceType';
 
 gsap.registerPlugin(ScrollTrigger) // ScrollTrigger 플러그인 등록
 
-const props = {
-  heading: 'OUR WORK',
-  description: <>
-    <span className="block">KEDUALL은 언어 교육을 넘어</span>
-    <span className="block">문화, 기술, 미래의 가능성까지 연결하며</span>
-    <span className="block">글로벌 학습자에게 필요한 모든 것을 제공합니다.</span>
-  </>
-}
-
-const items = [
-  {
-    src: '/images/work-banner-01.png',
-    heading: <div className="heading">
-      <span>AI 기반</span>
-      <span>학습 시스템</span>
-    </div>,
-    description: <div>
-      <p>학습자의 실력/목표에 맞춰</p>
-      <p>자동으로 콘텐츠/강사를 추천</p>
-    </div>
-  },
-  {
-    src: '/images/work-banner-02.png',
-    heading: <div className="heading">
-      <span>한국어</span>
-      <span>교육 플랫폼</span>
-    </div>,
-    description: <div>
-      <p>전 세계 한국어 학습자와 강사를</p>
-      <p>연결하는 온라인 교육 플랫폼</p>
-    </div>
-  },
-    {
-    src: '/images/work-banner-03.png',
-    heading: <div className="heading">
-      <span>유학 및 취업</span>
-      <span>연계 지원</span>
-    </div>,
-      description: <div>
-      <p>교육 이후의 진로</p>
-      <p>(대학 진학, 한국 취업)까지 연계</p>
-    </div>
-  },
-      {
-    src: '/images/work-banner-04.png',
-    heading: <div className="heading">
-      <span>K-Culture</span>
-      <span>연계 프로그램</span>
-    </div>,
-    description: <div>
-      <p>K-콘텐츠·문화·라이프스타일과</p>
-      <p>연결된 테마형 교육 기획</p>
-    </div>
-  },
-];
-
 const MainWorks = () => {
   const deviceType = useDeviceType();
+  const { props, viewItems } = mainItems.mainWorks;
 
   useEffect(() => {
-    console.log("deviceType: ", deviceType);
+    // console.log("deviceType: ", deviceType);
 
   }, [deviceType])
 
@@ -86,7 +32,7 @@ const MainWorks = () => {
             y: 0,
             duration: 0.4,
             ease: 'power2.inOut',
-            stagger: 0.2, 
+            stagger: 0.2,
           });
 
           const imgBox = document.querySelectorAll('.img');
@@ -107,7 +53,7 @@ const MainWorks = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-  
+
   return (
     <MainWorksContainer id="work">
       <Section {...props}>
@@ -116,7 +62,7 @@ const MainWorks = () => {
             <DeskTopContents>
               <ul className="main-works-list">
                 {
-                  items.map((item, index) => (
+                  viewItems.map((item, index) => (
                     <li key={index}>
                       <div className="img-container">
                         <div className="img">
@@ -136,7 +82,7 @@ const MainWorks = () => {
             <MobileContents>
               <ul>
                 {
-                  items.map((item, index) => (
+                  viewItems.map((item, index) => (
                     <li key={index}>
                       <div className="img-container">
                         <div className="img">
@@ -235,7 +181,7 @@ const DeskTopContents = styled.div`
           color: var(--primary);
         }
       }
-        
+
       p {
         text-align: center;
         font-size: 16px;

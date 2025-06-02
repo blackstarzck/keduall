@@ -1,13 +1,15 @@
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { mainItems } from '../../data/sectionItems';
 
 gsap.registerPlugin(ScrollTrigger) // ScrollTrigger 플러그인 등록
 
 const Introduction = () => {
   const brandRef = useRef(null);
   const introRef = useRef(null);
+    const { brand, description, highlight } = mainItems.introductionBanner;
 
   useEffect(() => {
     ScrollTrigger.create({
@@ -38,11 +40,11 @@ const Introduction = () => {
   return (
     <IntroductionContainer className="intro-container">
       <Brand>
-        <h3 ref={brandRef} className="opacity-0">KeduAll</h3>
+        <h3 ref={brandRef} className="opacity-0">{ brand }</h3>
       </Brand>
       <div ref={introRef} className="brand-desc-wrap opacity-0">
-        <div className="brand-desc">Shaping the future of </div>
-        <div className="brand-desc">Korean education</div>
+        <div className="brand-desc">{ description }</div>
+        <div className="brand-desc">{ highlight }</div>
       </div>
     </IntroductionContainer>
   );
@@ -72,7 +74,7 @@ const IntroductionContainer = styled.div`
       text-align: center;
     }
   }
-  
+
   @media screen and (min-width: 410px) {
     .brand-desc {
       font-size: 22px;
@@ -93,7 +95,7 @@ const IntroductionContainer = styled.div`
 
   @media screen and (min-width: 1024px) {
     padding: 86px 0;
-    
+
     .brand-desc {
       margin-top: 30px;
       font-size: 60px;

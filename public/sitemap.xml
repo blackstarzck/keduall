@@ -119,4 +119,11 @@
   <priority>0.8</priority>
 </url>
 
+<url>
+  <loc>https://www.keduall.com/study-abroad</loc>
+  <lastmod>2025-05-30T01:43:40+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1</priority>
+</url>
+
 </urlset>

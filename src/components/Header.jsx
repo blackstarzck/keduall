@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { NavLink, useLocation } from 'react-router';
-import MobileMenuContainer from './MobileMenuContainer';
+import styled from 'styled-components';
+import { useMenu } from '../contexts/MenuContext';
 import { menuItems } from '../data/menuItems';
+import MobileMenuContainer from './Home/MobileMenuContainer';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
   const [isHover, setIsHover] = useState(false);
   const location = useLocation();
   const gnbNavRef = useRef(null);
@@ -20,7 +21,7 @@ const Header = () => {
     }
 
     gnbNavRef.current?.addEventListener('mouseenter', handleMouseEnter);
-    gnbNavRef.current?.addEventListener('mouseleave', handleMouseLeave); 
+    gnbNavRef.current?.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       gnbNavRef.current?.removeEventListener('mouseenter', handleMouseEnter);
@@ -32,12 +33,22 @@ const Header = () => {
   useEffect(() => {
     if (location.hash) {
       const elementId = location.hash.replace('#', '');
+      console.log('앵커 시도:', location.hash, '찾을 ID:', elementId);
       const element = document.getElementById(elementId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        console.log('요소 찾음:', element);
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100)
+      } else {
+        console.warn('해당 ID의 요소를 찾을 수 없습니다:', elementId);
       }
     }
   }, [location]); // location 변경 시 실행
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]); // location.pathname 변경 시 실행
 
   return (
     <header>
@@ -76,7 +87,12 @@ const Header = () => {
             ))}
           </GnbList>
         </GnbNav>
-        <Logo><NavLink to="/"><img src={(isHover || isMenuOpen) ? "/images/logo_dark.png" : "/images/logo_white.png"} alt="케듀올 로고" /></NavLink></Logo>
+        {/* 로고 */}
+        <Logo>
+          <NavLink to="/">
+            <img src={(isHover || isMenuOpen) ? "/images/logo_dark.png" : "/images/logo_white.png"} alt="케듀올 로고" />
+          </NavLink>
+        </Logo>
         <MenuButton
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);
@@ -86,7 +102,6 @@ const Header = () => {
         </MenuButton>
         <MobileMenuContainer isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </HeaderContainer>
-      { `${isMenuOpen}` }
     </header>
   );
 };
@@ -100,7 +115,6 @@ const HeaderContainer = styled.div`
   left: 0;
   right: 0;
   z-index: 100;
-  // background: rgba(255, 255, 255, 0.2);
   background-color: rgba(96, 97, 119, .4);
   backdrop-filter: blur(10px);
 
@@ -114,7 +128,6 @@ const Logo = styled.h1`
   position: absolute;
   left: 16px;
   top: 50%;
-
   transform: translateY(-50%);
   z-index: 100;
 
@@ -125,9 +138,17 @@ const Logo = styled.h1`
 
     img {
       height: 100%;
-      transition: all .3s ease;[
+      transition: all .3s ease;
+    }
+
+
+
+    @media screen and (max-width: 768px) {
+      height: 36px;
     }
   }
+
+
 
   @media screen and (min-width: 1024px) {
     width: 150px;
@@ -144,6 +165,7 @@ const GnbNav = styled.nav`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  overflow: hidden;
 
   &::after {
     content: "";
@@ -160,6 +182,8 @@ const GnbNav = styled.nav`
 
   @media screen and (min-width: 1024px) {
     &:hover {
+      overflow: visible;
+
       &::after {
         height: calc(100vh / 2);
         transition: all .3s ease;

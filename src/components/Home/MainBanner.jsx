@@ -1,30 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
-
-const bannerItems = [
-  {
-    id: 1,
-    src: '/images/main-banner-01.png',
-    title: '“당신의 한국어를 세계로”',
-    description1: '우리는 한국어를 통해 세계와 소통하고,',
-    description2: '그 안에 담긴 문화의 가치를 함께 전합니다.',
-  },
-  {
-    id: 2,
-    src: '/images/main-banner-02.png',
-    title: '“당신의 가능성을 세계로 연결합니다”',
-    description1: '언어와 커리어를 잇는 글로벌 교육 플랫폼,',
-    description2: '세상을 향한 당신의 도약을 함께합니다.',
-  },
-]
+import { mainItems } from '../../data/sectionItems';
 
 const MainBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const swiperRef = useRef(null);
   const timerRef = useRef(null);
   const [pause, setPause] = useState(false);
+  const { bannerItems } = mainItems.mainBanner;
 
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.autoplay) {
@@ -150,7 +135,7 @@ const Description = styled.div`
       font-size: 18px;
     }
   }
-    
+
   @media screen and (min-width: 768px) {
     h2 {
       font-size: 46px;
@@ -185,7 +170,7 @@ const Pagination = styled.div`
   }
 
   .current, .total {
-    // font-family: 'Myriad Variable Concept'; 
+    // font-family: 'Myriad Variable Concept';
   }
 
   .progress {

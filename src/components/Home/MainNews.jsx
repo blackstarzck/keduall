@@ -1,60 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import Heading from './Heading';
-import Description from './Description';
-import NewsItem from './NewsItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { NavLink } from 'react-router';
-import useDeviceType from '../hooks/useDeviceType';
-
-const props = {
-  heading: 'NEWS & NOTICE',
-  description: <>
-    <span className="block">케듀올의 최신 소식과 중요 안내를 전해드립니다.</span>
-    <span className="block">지금 우리에게 일어나고 있는 이야기들을 확인해보세요.</span>
-  </>
-}
-
-const newsItems = [
-  {
-    id: 1,
-    imgSrc: "images/news-thumb-01.png",
-    category: "NEWS",
-    title: "㈜케듀올-베트남 TMA, 에듀테크 플랫폼 개발 계약 체결",
-    date: "2024. 04. 01",
-    link: "#"
-  },
-  {
-    id: 2,
-    imgSrc: "images/news-thumb-02.png",
-    category: "NEWS",
-    title: "‘2024 대한민국 동반성장 대상’ 최우수 명예기업 수상",
-    date: "2024. 04. 07",
-    link: "#"
-  },
-  {
-    id: 3,
-    imgSrc: "images/news-thumb-03.png",
-    category: "NEWS",
-    title: "제 30회 기업혁신 대상 시상식 ESG 경영에서 대상 수상",
-    date: "2025. 05. 10",
-    link: "#"
-  },
-]
-
-const prevNewsItems = newsItems.reduce((acc, item, index, arr) => {
-  if (index === 0) return acc; // 첫 번째 요소는 추가하지 않음
-  return [...acc, item]; // 나머지 요소 추가
-}, []).concat(newsItems[0]); // 첫 번째 요소를 마지막에 추가
+import { mainItems } from '../../data/sectionItems';
+import useDeviceType from '../../hooks/useDeviceType';
+import Description from './Description';
+import Heading from './Heading';
+import NewsItem from './NewsItem';
 
 const MainNews = () => {
   const [current, setCurrent] = useState(0);
   const swiperRef = useRef(null);
   const swiperPreviewRef = useRef(null);
   const deviceType = useDeviceType();
+  const { props, newsItems, prevNewsItems } = mainItems.mainNews;
 
   useEffect(() => {
-    console.log("deviceType: ", deviceType);
+    // console.log("deviceType: ", deviceType);
   }, [deviceType])
 
   return (
@@ -89,7 +51,7 @@ const MainNews = () => {
                 <img src="/icons/arrow-right.svg" alt="다음" />
               </button>
             </div>
-            <span className="total font-concept text-[#999999]">0{newsItems.length}</span>
+            <span className="total font-concept text-[#999999]">0{newsItems?.length}</span>
           </div>
           <Link to="/"><span>뉴스 바로가기</span><img src="/icons/chevron_right.svg" alt="이동 아이콘" /></Link>
         </Pagination>
@@ -115,7 +77,7 @@ const MainNews = () => {
             }}
           >
             {
-              newsItems.map((item) => (
+              newsItems && newsItems.map((item) => (
                 <SwiperSlide>
                   <NewsItem {...item} />
                 </SwiperSlide>
@@ -139,7 +101,7 @@ const MainNews = () => {
             }}
           >
             {
-              prevNewsItems.map((item) => (
+              prevNewsItems && prevNewsItems.map((item) => (
                 <SwiperSlide>
                   <NewsItem {...item} />
                 </SwiperSlide>

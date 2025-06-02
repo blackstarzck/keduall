@@ -67,3 +67,9 @@
   src: url('/fonts/Myriad Variable Concept.ttf') format('truetype');
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-display: swap;
+}
