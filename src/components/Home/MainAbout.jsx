@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { mainItems } from '../../data/sectionItems';
-import useDeviceType from '../../hooks/useDeviceType';
-import Section from './Section';
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { mainItems } from "../../data/sectionItems";
+import useDeviceType from "../../hooks/useDeviceType";
+import Section from "./Section";
 
 const MainAbout = () => {
   const [current, setCurrent] = useState(0);
@@ -11,123 +11,117 @@ const MainAbout = () => {
   const swiperRef = useRef(null);
   const swiperPreviewRef = useRef(null);
   const deviceType = useDeviceType();
-  const { props, viewItems, previewItems } = mainItems.mainAbout;
+  const { props, viewItems, previewitems } = mainItems.mainAbout;
 
   useEffect(() => {
     // console.log("deviceType: ", deviceType);
-
-  }, [deviceType])
+  }, [deviceType]);
 
   return (
     <MainAboutContainer id="about">
       <Section {...props}>
-        {
-          deviceType === 'desktop' ? (
-            <DeskTopContents>
-              <div className="left">
-                <ul>
-                  {
-                    viewItems.map((item) => (
-                      <li
-                        key={item.id}
-                        className={current === (item.id - 1) ? 'active' : ''}
-                        onClick={() => {
-                          const targetIndex = item.id - 1;
-                          swiperRef.current?.slideToLoop(targetIndex)
-                          swiperPreviewRef.current?.slideToLoop(targetIndex)
-                          setSwiperDragStatus(true)
-                          setCurrent(targetIndex)
-                        }}
-                      >
-                        <span>{item.heading}</span>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-              <div className="right">
-                <ViewContainer>
-                  <Swiper
-                    loop={true}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    onSwiper={(swiper) => swiperRef.current = swiper}
-                    onSlideChange={(swiper) => {
-                      if (current === swiper.realIndex) return;
-                      if (swiperDragStatus) return;
-
-                      if (swiper.swipeDirection === 'next') {
-                        swiperPreviewRef.current?.slideNext()
-                        setCurrent(swiper.realIndex)
-                      } else if (swiper.swipeDirection === 'prev') {
-                        swiperPreviewRef.current?.slidePrev()
-                        setCurrent(swiper.realIndex)
-                      }
-                    }}
-                    onSlideChangeTransitionEnd={() => {
-                      setSwiperDragStatus(false)
-                    }}
-                  >
-                    {
-                      viewItems.map((item, idx) => (
-                        <SwiperSlide key={item.id}>
-                          <ViewItem>
-                            <ViewDescription>
-                              <h3>{item.heading}</h3>
-                              <p>{item.description}</p>
-                            </ViewDescription>
-                            <ViewImage>
-                              <img src={item.imageSrc} alt={item.heading} />
-                            </ViewImage>
-                          </ViewItem>
-                        </SwiperSlide>
-                      ))
-                    }
-                  </Swiper>
-                </ViewContainer>
-                <PreviewContainer>
-                  <Swiper
-                    loop={true}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    onSwiper={(swiper) => {
-                      swiperPreviewRef.current = swiper
-                    }}
-                    allowTouchMove={false}
-                  >
-                    {
-                      previewItems && previewItems.map((item) => (
-                        <SwiperSlide key={item.id}>
-                          <PreviewItem>
-                            <img src={item.imageSrc} alt={item.heading} draggable="false" />
-                          </PreviewItem>
-                        </SwiperSlide>
-                      ))
-                    }
-                  </Swiper>
-                </PreviewContainer>
-              </div>
-            </DeskTopContents>
-          ) : (
-            <MobileContents>
+        {deviceType === "desktop" ? (
+          <DeskTopContents>
+            <div className="left">
               <ul>
-                {
-                  viewItems.map((item, idx) => (
-                  <li key={item.id}>
-                    <div className="info">
-                        <span>{item.heading}</span>
-                        <p>{item.description}</p>
-                    </div>
-                    <div className="img">
-                        <img src={item.imageSrc} alt={item.heading} />
-                    </div>
+                {viewItems.map((item) => (
+                  <li
+                    key={item.id}
+                    className={current === item.id - 1 ? "active" : ""}
+                    onClick={() => {
+                      const targetIndex = item.id - 1;
+                      swiperRef.current?.slideToLoop(targetIndex);
+                      swiperPreviewRef.current?.slideToLoop(targetIndex);
+                      setSwiperDragStatus(true);
+                      setCurrent(targetIndex);
+                    }}
+                  >
+                    <span>{item.heading}</span>
                   </li>
-                  ))
-                }
+                ))}
               </ul>
-            </MobileContents>
-          )
-        }
+            </div>
+            <div className="right">
+              <ViewContainer>
+                <Swiper
+                  loop={true}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  onSwiper={(swiper) => (swiperRef.current = swiper)}
+                  onSlideChange={(swiper) => {
+                    if (current === swiper.realIndex) return;
+                    if (swiperDragStatus) return;
+
+                    if (swiper.swipeDirection === "next") {
+                      swiperPreviewRef.current?.slideNext();
+                      setCurrent(swiper.realIndex);
+                    } else if (swiper.swipeDirection === "prev") {
+                      swiperPreviewRef.current?.slidePrev();
+                      setCurrent(swiper.realIndex);
+                    }
+                  }}
+                  onSlideChangeTransitionEnd={() => {
+                    setSwiperDragStatus(false);
+                  }}
+                >
+                  {viewItems.map((item, idx) => (
+                    <SwiperSlide key={item.id}>
+                      <ViewItem>
+                        <ViewDescription>
+                          <h3>{item.heading}</h3>
+                          <p>{item.description}</p>
+                        </ViewDescription>
+                        <ViewImage>
+                          <img src={item.imageSrc} alt={item.heading} />
+                        </ViewImage>
+                      </ViewItem>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </ViewContainer>
+              <PreviewContainer>
+                <Swiper
+                  loop={true}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  onSwiper={(swiper) => {
+                    swiperPreviewRef.current = swiper;
+                  }}
+                  allowTouchMove={false}
+                >
+                  {previewitems &&
+                    previewitems.map((item) => (
+                      <SwiperSlide key={item.id}>
+                        <PreviewItem>
+                          <img
+                            src={item.imageSrc}
+                            alt={item.heading}
+                            draggable="false"
+                          />
+                        </PreviewItem>
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </PreviewContainer>
+            </div>
+          </DeskTopContents>
+        ) : (
+          <MobileContents>
+            <ul>
+              {viewItems.map((item, idx) => (
+                <li key={item.id}>
+                  <div className="info">
+                    <span>{item.heading}</span>
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="img">
+                    <img src={item.imageSrc} alt={item.heading} />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </MobileContents>
+        )}
       </Section>
     </MainAboutContainer>
   );
@@ -144,7 +138,7 @@ const MainAboutContainer = styled.div`
   @media screen and (min-width: 1024px) {
     padding: 160px 80px 160px;
   }
-`
+`;
 
 const DeskTopContents = styled.div`
   width: 100%;
@@ -173,7 +167,7 @@ const DeskTopContents = styled.div`
         transition: color 0.3s ease;
 
         &::after {
-          content: '';
+          content: "";
           display: block;
           width: 0%;
           height: 2px;
@@ -203,8 +197,6 @@ const DeskTopContents = styled.div`
     gap: 5%;
     margin-right: -20%;
   }
-
-
 `;
 
 const ViewContainer = styled.div`
@@ -217,7 +209,7 @@ const ViewItem = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-`
+`;
 
 const ViewDescription = styled.div`
   position: absolute;
@@ -247,7 +239,7 @@ const ViewDescription = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     width: 62%;
     height: 1px;
     background-color: var(--primary);
@@ -258,7 +250,7 @@ const ViewDescription = styled.div`
   }
 
   &::after {
-    content: '';
+    content: "";
     width: 62%;
     height: 1px;
     background-color: var(--primary);
@@ -271,7 +263,6 @@ const ViewDescription = styled.div`
 
 const ViewImage = styled.div`
   width: 40%;
-
 `;
 
 const PreviewContainer = styled.div`
@@ -279,7 +270,7 @@ const PreviewContainer = styled.div`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 100%;
     display: block;
