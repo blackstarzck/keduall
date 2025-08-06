@@ -81,7 +81,7 @@ export const menuItems = [
     title: 'RESOURCES',
     // path: '/#press',
     subItems: [
-      { title: '보도자료', path: '/#press' },
+      { title: '보도자료', path: '/news' },
       // { title: '블로그', path: '/' },
       // { title: 'SNS', path: '/' }
     ]

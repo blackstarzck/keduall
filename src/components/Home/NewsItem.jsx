@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const NewsItem = ({ imgSrc, category, title, date, link }) => {
+const NewsItem = ({ side, imgSrc, category, title, date, link }) => {
   return (
-    <NewsItemContainer className="" to={link}>
+    <NewsItemContainer $side={side} className="" to={link} target="_blank" rel="noopener noreferrer">
       <div className="tumbnail">
         <img src={ imgSrc } alt={ category } />
       </div>
@@ -21,10 +21,13 @@ const NewsItemContainer = styled(NavLink)`
   display: block;
 
   .tumbnail {
-    margin-bottom: 14px;
+    margin-bottom: 26px;
+    height: ${({ $side }) => $side === 'right' ? '300px' : '500px'};
 
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -35,7 +38,7 @@ const NewsItemContainer = styled(NavLink)`
 
   .category {
     color: var(--primary);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 14px;
   }

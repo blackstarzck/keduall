@@ -11,7 +11,6 @@ const MainBanner = () => {
 
   useEffect(() => {
     if (imgSrc) {
-      console.log("imgSrc: ", imgSrc)
       gsap.to('#mobile-menu-container', {
         right: '-100%',
         duration: 0.3,

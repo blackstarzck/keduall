@@ -130,14 +130,15 @@ const Logo = styled.h1`
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
+  max-width: 150px;
 
   a {
     display: block;
     width: 100%;
-    height: 50px;
+    // height: 50px;
 
     img {
-      height: 100%;
+      // height: 100%;
       transition: all .3s ease;
     }
 
@@ -145,14 +146,17 @@ const Logo = styled.h1`
 
     @media screen and (max-width: 768px) {
       height: 36px;
+
+      img {
+        height: 100%;
+      }
     }
   }
 
 
 
   @media screen and (min-width: 1024px) {
-    width: 150px;
-    height: 50px;
+    // height: 50px;
     left: 46px;
   }
 `;

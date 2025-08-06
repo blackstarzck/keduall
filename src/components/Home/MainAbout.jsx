@@ -308,6 +308,7 @@ const MobileContents = styled.div`
       align-items: center;
       overflow: hidden;
       position: relative;
+      min-height: 200px;
 
       .info {
         display: flex;
@@ -321,7 +322,7 @@ const MobileContents = styled.div`
         z-index: 2;
 
         p {
-          font-size: 146x;
+          font-size: 14px;
           line-height: 1.4;
           word-break: keep-all;
         }
@@ -352,13 +353,11 @@ const MobileContents = styled.div`
 
   @media screen and (max-width: 640px) {
     li {
-      height: 140px;
-
       .info {
         width: 100%;
       }
       img {
-        visibility: hidden;
+        display: none;
       }
     }
   }

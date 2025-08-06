@@ -53,7 +53,7 @@ const MainNews = () => {
             </div>
             <span className="total font-concept text-[#999999]">0{newsItems?.length}</span>
           </div>
-          <Link to="/"><span>뉴스 바로가기</span><img src="/icons/chevron_right.svg" alt="이동 아이콘" /></Link>
+          <Link to="/news"><span>뉴스 바로가기</span><img src="/icons/chevron_right.svg" alt="이동 아이콘" /></Link>
         </Pagination>
       </Top>
 
@@ -103,7 +103,7 @@ const MainNews = () => {
             {
               prevNewsItems && prevNewsItems.map((item) => (
                 <SwiperSlide>
-                  <NewsItem {...item} />
+                  <NewsItem side="right" {...item} />
                 </SwiperSlide>
               ))
             }
@@ -127,7 +127,6 @@ const MainNewsContainer = styled.div`
 `
 
 const Contents = styled.div`
-
   display: flex;
   border-top: 1px solid #e8e8e8;
 

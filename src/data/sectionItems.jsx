@@ -140,53 +140,41 @@ export const mainItems = {
     newsItems: [
       {
         id: 1,
-        imgSrc: "images/news-thumb-01.png",
+        imgSrc: "images/news/news-thumb-01.png",
         category: "NEWS",
         title: "㈜케듀올-베트남 TMA, 에듀테크 플랫폼 개발 계약 체결",
+        description: '㈜케듀올이 베트남 호치민 2군에 ㈜FIKTECH를 설립하고, 베트남 글로벌 IT 기업 TMA Solutions(이하 TMA)와 AI 기반 한국어 교육 플랫폼 협력 개발 계약을 체결했다고 1일 밝혔다.TMA Solutions은 교육, 통신, 금융, 의료 등 다양한 산업 분야에서 소프트웨어를 개발하는 베트남 대표 IT기업이다. 에이디링크의 MXE-210 시리즈 IIoT 게이트웨이를 활용해 T-Connect IoT 플랫폼을 기반으로 하는 머신 모니터링 시스템을 구축 등 많은 뛰어난 AI 응용 기술력을 가지고 있다.',
         date: "2024. 04. 01",
-        link: "#"
+        link: "https://edu.chosun.com/m/edu_article.html?contid=2025040180133"
       },
       {
         id: 2,
-        imgSrc: "images/news-thumb-02.png",
+        imgSrc: "images/news/news-thumb-02.png",
         category: "NEWS",
-        title: "‘2024 대한민국 동반성장 대상’ 최우수 명예기업 수상",
-        date: "2024. 04. 07",
-        link: "#"
-      },
-      {
-        id: 3,
-        imgSrc: "images/news-thumb-03.png",
-        category: "NEWS",
-        title: "제 30회 기업혁신 대상 시상식 ESG 경영에서 대상 수상",
-        date: "2025. 05. 10",
-        link: "#"
-      },
+        title: "케듀올, AI 기반 한국어 학습 플랫폼 베트남 협력 가속화",
+        description: '케듀올은 지난 4월 베트남 대표 IT기업 TMA와의 공동 개발 계약 체결을 시작으로, 베트남 현지 교육 기관들과의 협업을 확대하고 있다. 특히 △다이남대학교(Dai Nam University)와는 7월 초 MOU를 체결했으며, 올해 상반기 동안 △호치민 국립 사범대학교 △호치민 경제재정대학교 △호치민 인문사회과학대학교 등과도 순차적으로 MOU 체결과 교육 콘텐츠 공동 개발을 추진할 계획이다.',
+        date: "2025. 07. 21",
+        link: "https://edu.chosun.com/m/edu_article.html?contid=2025040180133"
+      }
     ],
     prevNewsItems: [
       {
         id: 2,
-        imgSrc: "images/news-thumb-02.png",
+        imgSrc: "images/news/news-thumb-02.png",
         category: "NEWS",
-        title: "‘2024 대한민국 동반성장 대상’ 최우수 명예기업 수상",
-        date: "2024. 04. 07",
-        link: "#"
-      },
-      {
-        id: 3,
-        imgSrc: "images/news-thumb-03.png",
-        category: "NEWS",
-        title: "제 30회 기업혁신 대상 시상식 ESG 경영에서 대상 수상",
-        date: "2025. 05. 10",
-        link: "#"
+        title: "케듀올, AI 기반 한국어 학습 플랫폼 베트남 협력 가속화",
+        description: '케듀올은 지난 4월 베트남 대표 IT기업 TMA와의 공동 개발 계약 체결을 시작으로, 베트남 현지 교육 기관들과의 협업을 확대하고 있다. 특히 △다이남대학교(Dai Nam University)와는 7월 초 MOU를 체결했으며, 올해 상반기 동안 △호치민 국립 사범대학교 △호치민 경제재정대학교 △호치민 인문사회과학대학교 등과도 순차적으로 MOU 체결과 교육 콘텐츠 공동 개발을 추진할 계획이다.',
+        date: "2025. 07. 21",
+        link: "https://edu.chosun.com/m/edu_article.html?contid=2025040180133"
       },
       {
         id: 1,
-        imgSrc: "images/news-thumb-01.png",
+        imgSrc: "images/news/news-thumb-01.png",
         category: "NEWS",
         title: "㈜케듀올-베트남 TMA, 에듀테크 플랫폼 개발 계약 체결",
+        description: '㈜케듀올이 베트남 호치민 2군에 ㈜FIKTECH를 설립하고, 베트남 글로벌 IT 기업 TMA Solutions(이하 TMA)와 AI 기반 한국어 교육 플랫폼 협력 개발 계약을 체결했다고 1일 밝혔다.TMA Solutions은 교육, 통신, 금융, 의료 등 다양한 산업 분야에서 소프트웨어를 개발하는 베트남 대표 IT기업이다. 에이디링크의 MXE-210 시리즈 IIoT 게이트웨이를 활용해 T-Connect IoT 플랫폼을 기반으로 하는 머신 모니터링 시스템을 구축 등 많은 뛰어난 AI 응용 기술력을 가지고 있다.',
         date: "2024. 04. 01",
-        link: "#"
+        link: "https://edu.chosun.com/m/edu_article.html?contid=2025040180133"
       },
     ]
   },
@@ -409,4 +397,33 @@ export const studyAbroadItems = {
       }
     ]
   }
+}
+export const newsItems = {
+   mainBanner: {
+    banner: [
+      "/images/news-banner-01.jpg",
+    ],
+    title: 'NEWS & NOTICE',
+    description: '뉴스',
+  },
+  items: [
+    {
+      id: 1,
+      imgSrc: "images/news/news-thumb-01.png",
+      category: "NEWS",
+      title: "㈜케듀올-베트남 TMA, 에듀테크 플랫폼 개발 계약 체결",
+      description: '㈜케듀올이 베트남 호치민 2군에 ㈜FIKTECH를 설립하고, 베트남 글로벌 IT 기업 TMA Solutions(이하 TMA)와 AI 기반 한국어 교육 플랫폼 협력 개발 계약을 체결했다고 1일 밝혔다.TMA Solutions은 교육, 통신, 금융, 의료 등 다양한 산업 분야에서 소프트웨어를 개발하는 베트남 대표 IT기업이다. 에이디링크의 MXE-210 시리즈 IIoT 게이트웨이를 활용해 T-Connect IoT 플랫폼을 기반으로 하는 머신 모니터링 시스템을 구축 등 많은 뛰어난 AI 응용 기술력을 가지고 있다.',
+      date: "2024. 04. 01",
+      link: "https://edu.chosun.com/m/edu_article.html?contid=2025040180133"
+    },
+    {
+      id: 2,
+      imgSrc: "images/news/news-thumb-02.png",
+      category: "NEWS",
+      title: "케듀올, AI 기반 한국어 학습 플랫폼 베트남 협력 가속화",
+      description: '케듀올은 지난 4월 베트남 대표 IT기업 TMA와의 공동 개발 계약 체결을 시작으로, 베트남 현지 교육 기관들과의 협업을 확대하고 있다. 특히 △다이남대학교(Dai Nam University)와는 7월 초 MOU를 체결했으며, 올해 상반기 동안 △호치민 국립 사범대학교 △호치민 경제재정대학교 △호치민 인문사회과학대학교 등과도 순차적으로 MOU 체결과 교육 콘텐츠 공동 개발을 추진할 계획이다.',
+      date: "2025. 07. 21",
+      link: "https://www.newswire.co.kr/newsRead.php?no=1015205"
+    }
+  ]
 }
